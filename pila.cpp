@@ -1,65 +1,116 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <iostream>
 
-
-using namespace std;
-
-struct Nodo{
-    int dato;
-    Nodo *Siguiente;
+struct nodo
+{
+    int numero;
+    nodo *siguiente;
 };
 
-void init_pila (Nodo *&, int);
+nodo *pila=NULL;
 
-void quitar (Nodo *&, int &);
 
-int main(){
-    int n,dato;
-    char salir;
+void estado(nodo *&);
+void insertar(nodo *&);
+void quitar(nodo *&);
 
-    Nodo *pila =NULL;
-    do{
+int main()
+{
 
-        printf("\n\t\tMENU\n");
-        printf("\n1. Inicializar Pila\n");
-        printf("\n2. Verificar Pila")
-        printf("\n3. Insertar Elementos de Pila\n");
-        printf("\n4. Retirar elemento de pila")
-        printf("\n0. Salir")
-        printf("\nOpcion: ");scanf("%d",dato);
+    int opc;
+    printf("********** MENU***********\n");
+    printf("1. Verificar estado de la pila\n");
+    printf("2. Insertar elementos a la pila\n");
+    printf("3. Quitar elementos de la pila\n");
+    printf("0. Salir\n");
+    printf("Digite opcion: ");
+    scanf("%d",&opc);
 
-        switch(dato){
-        printf("Ingrese un numero: \n");
-        scanf("%d",&n);
-        insertar(pila, n);
-        printf("Presiones (S) para insertar mas datos");
-        cin>>salir;
-        cin.ignore(256,'\n');
-        }while(salir=='S' || salir=='s');
-        while(pila!=NULL){
-            quitar(pila,n);
-            if(pila!=NULL){
-                printf("%d -> ",n);
-            }else{
-                printf("%d -> FIN",n);
-            }
+    switch(opc)
+    {
+    case 1:
+        {
+            estado(pila);
+        }break;
+    case 2:
+        {
+            insertar(pila);
+        }break;
+    case 3:
+        {
+            quitar(pila);
+        }break;
+    case 0:
+        {
+            printf("salir");
+        }break;
+    default:
+        {
+            printf("Opcion incorrecta\n");
+            system("pause");
 
-            }
+
         }
-    return 0;
+    }
+}
+
+
+
+
+
+void estado(nodo *&pila)
+{
+    if(pila==NULL)
+    {
+        printf("La pila esta vacia\n");
+    }
+        else
+        {
+        printf("La pila contiene elemnetos\n");
+        }
+    system("pause");
 
 }
 
-void init_pila(){
-    Nodo *pila =NULL;
+void insertar(nodo *&pila)
+{
+    int n, c=1, x;
 
-    printf("\Pila inicializada correctamente\n");
+    do
+    {
+        printf("\nIngrese elemento %d a la pila: ",c);
+        scanf("%d",&n);
+        nodo *nuevo_nodo=(nodo*)malloc(sizeof(nodo));
+        nuevo_nodo->numero=n;
+        nuevo_nodo->siguiente=pila;
+        pila=nuevo_nodo;
+        c++;
+        printf("Desea ingresar mas elementos a la pila  1.SI o  2.NO: ");
+        scanf("%d",&x);
+    }while(x==1);
+    system("pause");
+
 }
 
-void quitar (Nodo *&pila, int &n){
-    Nodo *aux=pila;
-    n=aux->dato;
-    pila=aux->Siguiente;
-    free(aux);
+void quitar(nodo *&pila)
+{
+    int z;
+    while(pila!=NULL)
+    {
+        nodo *aux=pila;
+        z=aux->numero;
+        pila=aux->siguiente;
+        free(aux);
+        if(pila!=NULL)
+        {
+            printf("%d -> ",z);
+        }
+        else
+        {
+            printf("%d -> FIN\n",z);
+        }
+    }
+
+    system("pause");
+
 }
