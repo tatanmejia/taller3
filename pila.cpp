@@ -15,43 +15,47 @@ void insertar(nodo *&);
 void quitar(nodo *&);
 
 int main()
-{
+{   int opc;
+    do{
+        printf("********** MENU***********\n");
+        printf("1. Verificar estado de la pila\n");
+        printf("2. Insertar elementos a la pila\n");
+        printf("3. Quitar elementos de la pila\n");
+        printf("0. Salir\n");
+        printf("Digite opcion: ");
+        scanf("%d",&opc);
 
-    int opc;
-    printf("********** MENU***********\n");
-    printf("1. Verificar estado de la pila\n");
-    printf("2. Insertar elementos a la pila\n");
-    printf("3. Quitar elementos de la pila\n");
-    printf("0. Salir\n");
-    printf("Digite opcion: ");
-    scanf("%d",&opc);
+        switch(opc)
+        {
+        case 1:
+            {
+                system("cls");
+                estado(pila);
+            }break;
+        case 2:
+            {
+                system("cls");
+                insertar(pila);
+            }break;
+        case 3:
+            {
+                system("cls");
+                quitar(pila);
+            }break;
+        case 0:
+            {
+                system("cls");
+                printf("salir");
+            }break;
+        default:
+            {
+                printf("Opcion incorrecta\n");
+                system("pause");
 
-    switch(opc)
-    {
-    case 1:
-        {
-            estado(pila);
-        }break;
-    case 2:
-        {
-            insertar(pila);
-        }break;
-    case 3:
-        {
-            quitar(pila);
-        }break;
-    case 0:
-        {
-            printf("salir");
-        }break;
-    default:
-        {
-            printf("Opcion incorrecta\n");
-            system("pause");
-
-
+            }
         }
-    }
+    }while(opc != 0);
+
 }
 
 
@@ -66,7 +70,7 @@ void estado(nodo *&pila)
     }
         else
         {
-        printf("La pila contiene elemnetos\n");
+        printf("La pila contiene elementos\n");
         }
     system("pause");
 
